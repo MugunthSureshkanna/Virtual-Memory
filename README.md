@@ -25,7 +25,7 @@ A bitmap over the swap block device where each bit represents one page-sized slo
 
 The central dispatch point. On a fault, it looks up the faulting address in the SPT. If found in FSYS, it calls obtain_page to load from the executable. If found in SWAP, it calls alloc_frame which restores the page from the swap block. If not found, it applies a stack growth heuristic: faults within 8 MB of PHYS_BASE and within 32 bytes below esp (to handle PUSHA) trigger a new zeroed page allocation and SPT insertion.
 
-Synchronization
+**Synchronization**
 - frame_lock: global lock protecting frame table reads/writes and the clock hand
 - swap_lock: protects bitmap and block device operations
 - spt_lock (per-thread): protects each process's supplemental page table
