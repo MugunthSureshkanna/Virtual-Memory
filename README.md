@@ -5,8 +5,6 @@ An extension of the Pintos operating system implementing demand paging, a frame 
 
 This project adds virtual memory support to Pintos, removing the constraint that all program data must reside in physical memory simultaneously. Three core subsystems work together: a supplemental page table (SPT) tracks the state of every virtual page, a frame table manages physical memory with a clock-based eviction policy, and a swap table handles paging pages out to disk.
 
-**Key Components**
-
 **Supplemental Page Table (vm/page.c, vm/page.h)**
 
 A per-process hash table keyed on page-aligned virtual addresses. Each entry (spte) tracks where a page currently lives — physical memory (MEM), swap space (SWAP), or the file system (FSYS) — along with file metadata for lazy loading and a reference to the owning thread. The destructor walks the table on process exit to free all associated frames and swap slots.
